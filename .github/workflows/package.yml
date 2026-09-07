@@ -92,6 +92,7 @@ jobs:
         uses: actions/download-artifact@v6
         with:
           path: release-files
+          merge-multiple: true
 
       - name: Create release
         if: github.ref_name == 'dev'
@@ -104,7 +105,7 @@ jobs:
           body: "Built against https://github.com/youcord/Youcord/tree/dev on every commit. NOTE: tarballs do not update."
           draft: false
           tag: devbuild
-          artifacts: release-files/**/*
+          artifacts: release-files/*
 
       - name: Create release
         if: github.ref_name == 'stable'
@@ -114,4 +115,4 @@ jobs:
           prerelease: false
           tag: stable
           draft: true
-          artifacts: release-files/**/*
+          artifacts: release-files/*
