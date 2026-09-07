@@ -44,7 +44,7 @@
 [![Packaging status](https://repology.org/badge/vertical-allrepos/youcord.svg)](https://repology.org/project/youcord/versions)
 
 ### Windows
-[Get the .exe installer](https://github.com/nightcordlegit/youcord/releases)
+[Get the .exe installer](https://github.com/youcord/Youcord/releases)
 
 [<img src="https://user-images.githubusercontent.com/49786146/159123313-3bdafdd3-5130-4b0d-9003-40618390943a.png" width="200" />](https://winstall.app/apps/smartfrigde.Legcord)
 
@@ -65,7 +65,7 @@ Maintained by @imide, a contributor to Youcord and is officially sanctioned by u
 
 You can install Youcord directly using the `.deb` packages published on the GitHub Releases page.
 
-1. Go to the Releases page: https://github.com/nightcordlegit/youcord/releases
+1. Go to the Releases page: https://github.com/youcord/Youcord/releases
 2. Download the `.deb` that matches your architecture:
    - `amd64` (most Intel/AMD 64‑bit PCs)
    - `arm64` (AArch64, e.g. Raspberry Pi 4/5 64‑bit, ARM laptops)
@@ -79,7 +79,7 @@ Alternatively, you can copy the asset link from the release and install via term
 
 ```sh
 # Replace the URL below with the copied link to the .deb asset from the Releases page
-wget -O youcord.deb "https://github.com/nightcordlegit/youcord/releases/download/<tag>/<asset>.deb"
+wget -O youcord.deb "https://github.com/youcord/Youcord/releases/download/<tag>/<asset>.deb"
 sudo apt install youcord.deb
 ```
 
@@ -140,13 +140,13 @@ Youcord is also available in [Pi-Apps](https://github.com/Botspot/pi-apps).
 
 ### Pre-built binaries
 
- Check the **[releases tab](https://github.com/nightcordlegit/youcord/releases)** for precompiled packages for Linux, Windows, and macOS.
+ Check the **[releases tab](https://github.com/youcord/Youcord/releases)** for precompiled packages for Linux, Windows, and macOS.
 
 ### Compiling
 
  Alternatively, you can run Youcord from source ([NodeJS v26 and newer](https://nodejs.dev) and [pnpm](https://pnpm.io/installation#using-npm)) are required:
 
- 1. Clone Youcord repo: `git clone https://github.com/nightcordlegit/youcord.git`
+ 1. Clone Youcord repo: `git clone https://github.com/youcord/Youcord.git`
  2. Run `pnpm install` to install dependencies
  3. Build with `pnpm run build`
  4. Compile/Package with `pnpm run package`
@@ -175,7 +175,7 @@ Youcord is also available in [Pi-Apps](https://github.com/Botspot/pi-apps).
 
 ## Where can I find the source code?
 
-- The source code is on [GitHub](https://github.com/nightcordlegit/youcord/).
+- The source code is on [GitHub](https://github.com/youcord/Youcord/).
 
 ## Where can I translate this?
 

@@ -23,15 +23,15 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/nightcordlegit/youcord.git"
+        "url": "git+https://github.com/youcord/Youcord.git"
     },
     "author": "smartfrigde",
     "license": "OSL-3.0",
     "type": "module",
     "bugs": {
-        "url": "https://github.com/nightcordlegit/youcord/issues"
+        "url": "https://github.com/youcord/Youcord/issues"
     },
-    "homepage": "https://github.com/nightcordlegit/youcord#readme",
+    "homepage": "https://github.com/youcord/Youcord#readme",
     "devDependencies": {
         "@biomejs/biome": "2.5.5",
         "@rolldown-plugin/solid": "^0.1.0",

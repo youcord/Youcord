@@ -20,7 +20,7 @@ export const AboutPopup = (props: { close: () => void }) => {
     const [error, setError] = createSignal<string | null>(null);
 
     onMount(() => {
-        fetch("https://api.github.com/repos/nightcordlegit/youcord/contributors")
+        fetch("https://api.github.com/repos/youcord/Youcord/contributors")
             .then((response) => {
                 if (!response.ok) throw new Error("Failed to fetch contributors");
                 return response.json();
@@ -124,7 +124,7 @@ export const AboutPopup = (props: { close: () => void }) => {
                             <button
                                 type="button"
                                 class={classes.quickActionButton}
-                                onClick={() => window.open("https://github.com/nightcordlegit/youcord", "_blank")}
+                                onClick={() => window.open("https://github.com/youcord/Youcord", "_blank")}
                             >
                                 <span class={classes.quickActionButtonIcon}>
                                     <svg
@@ -144,7 +144,7 @@ export const AboutPopup = (props: { close: () => void }) => {
                                 </span>
                                 <span class={classes.quickActionButtonLabel}>
                                     <span class={classes.quickActionButtonTitle}>View Source Code</span>
-                                    <span class={classes.quickActionButtonDesc}>github.com/nightcordlegit/youcord</span>
+                                    <span class={classes.quickActionButtonDesc}>github.com/youcord/Youcord</span>
                                 </span>
                                 <svg
                                     class={classes.quickActionButtonArrow}

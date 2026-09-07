@@ -105,7 +105,7 @@ jobs:
           allowUpdates: true
           removeArtifacts: true
           prerelease: true
-          body: "Built against https://github.com/nightcordlegit/youcord/tree/dev on every commit. NOTE: tarballs do not update."
+          body: "Built against https://github.com/youcord/Youcord/tree/dev on every commit. NOTE: tarballs do not update."
           draft: false
           tag: devbuild
           artifacts: release-files/**/*

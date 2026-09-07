@@ -14,8 +14,8 @@ If you are fixing a critical bug or security issue, you may open fixes for both 
 ## Before you start a feature
 
 - Check open pull requests for overlap.
-- Check [GitHub enhancement issues](https://github.com/nightcordlegit/youcord/issues?q=label%3Aenhancement) and the [feature requests Discord channel](https://discord.com/channels/820732039253852171/1261471243123818566).
-- If the feature does not exist yet, [open an issue](https://github.com/nightcordlegit/youcord/issues), say you want to implement it, and wait for feedback before writing large changes.
+- Check [GitHub enhancement issues](https://github.com/youcord/Youcord/issues?q=label%3Aenhancement) and the [feature requests Discord channel](https://discord.com/channels/820732039253852171/1261471243123818566).
+- If the feature does not exist yet, [open an issue](https://github.com/youcord/Youcord/issues), say you want to implement it, and wait for feedback before writing large changes.
 - Familiarize yourself with the codebase rules below.
 
 ## Codebase rules
