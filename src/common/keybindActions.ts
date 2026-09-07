@@ -131,6 +131,6 @@ function runJavascript(js: string) {
 export function openSettings() {
     // won't load the correct page anyway (will just do /account) cause shelter doesn't hijack discord's routing
     mainWindows.forEach((window) => {
-        navigateTo(window, "/settings/legcord-settings");
+        navigateTo(window, "/settings/youcord-settings");
     });
 }

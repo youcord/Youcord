@@ -13,8 +13,8 @@ import { handleAction, isValidAction } from "./common/handleCommands";
 
 const { Interface } = dbusInterface;
 
-export const DBUS_INTERFACE_NAME = "app.legcord.Legcord";
-export const DBUS_ADDRESS = "/app/legcord/Legcord";
+export const DBUS_INTERFACE_NAME = "app.youcord.Youcord";
+export const DBUS_ADDRESS = "/app/youcord/Youcord";
 
 const FREEDESKTOP_PORTAL_NAME = "org.freedesktop.portal.Desktop";
 const FREEDESKTOP_PORTAL_ADDRESS = "/org/freedesktop/portal/desktop";
@@ -48,7 +48,7 @@ interface RegistryInterface extends ProxyInterface {
 }
 
 // original way of doing it (requires extensive babel plugins and typescript decorators)
-// class LegcordInterface extends Interface {
+// class YoucordInterface extends Interface {
 //     @method({ inSignature: "s", outSignature: "", noReply: true, disabled: false })
 //     TriggerAction(action: string): void {
 //         currentHandler(action);
@@ -58,7 +58,7 @@ interface RegistryInterface extends ProxyInterface {
 // THIS is nescessary only so we don't have to use babel
 // plugins all over rolldown.config.ts in every file, and slow down build time.
 // https://acrisci.github.io/doc/node-dbus-next/
-class LegcordInterface extends Interface {
+class YoucordInterface extends Interface {
     constructor() {
         super(DBUS_INTERFACE_NAME);
         this.$methods = {
@@ -83,12 +83,12 @@ class LegcordInterface extends Interface {
 }
 
 let bus: MessageBus | undefined;
-let legcordInterface: LegcordInterface | undefined;
+let youcordInterface: YoucordInterface | undefined;
 
 function getBus(): MessageBus {
     if (!bus) {
         bus = sessionBus();
-        legcordInterface = new LegcordInterface();
+        youcordInterface = new YoucordInterface();
     }
     return bus;
 }
@@ -99,11 +99,11 @@ function ensureDesktopFile(): void {
     if (existsSync(path)) return;
 
     mkdirSync(dir, { recursive: true });
-    writeFileSync(path, `[Desktop Entry]\nType=Application\nName=Legcord\nExec=${process.execPath}\nNoDisplay=true\n`);
+    writeFileSync(path, `[Desktop Entry]\nType=Application\nName=Youcord\nExec=${process.execPath}\nNoDisplay=true\n`);
 }
 
 function registerAppId(): Promise<void> {
-    ensureDesktopFile(); // we need a desktop file at XDG_PATH so we can associate with legcord's app_id
+    ensureDesktopFile(); // we need a desktop file at XDG_PATH so we can associate with youcord's app_id
     return getBus()
         .getProxyObject("org.freedesktop.portal.Desktop", "/org/freedesktop/portal/desktop")
         .then((portalObj) => {
@@ -144,8 +144,8 @@ export async function setupGlobalShortcuts() {
     }
 
     const sessionRequestPath = await globalShortcuts.CreateSession({
-        handle_token: new Variant("s", "legcord_session"),
-        session_handle_token: new Variant("s", "legcord_shortcuts"),
+        handle_token: new Variant("s", "youcord_session"),
+        session_handle_token: new Variant("s", "youcord_shortcuts"),
     });
 
     const sessionResult = (await awaitResponse(sessionRequestPath)) as { session_handle: Variant<string> }; // real response signature
@@ -156,7 +156,7 @@ export async function setupGlobalShortcuts() {
 
     const sessionHandle = sessionResult.session_handle.value;
     const bindRequestPath = await globalShortcuts.BindShortcuts(sessionHandle, actionList, "", {
-        handle_token: new Variant("s", "legcord_bind"),
+        handle_token: new Variant("s", "youcord_bind"),
     });
 
     await awaitResponse(bindRequestPath);
@@ -172,15 +172,15 @@ export async function startDbusService(): Promise<void> {
 
     const dbus = getBus();
     await dbus.requestName(DBUS_INTERFACE_NAME);
-    dbus.export(DBUS_ADDRESS, legcordInterface!);
+    dbus.export(DBUS_ADDRESS, youcordInterface!);
     console.info(`Registered DBus service at ${DBUS_INTERFACE_NAME} ${DBUS_ADDRESS}`);
 
-    // console.debug(legcordInterface)
+    // console.debug(youcordInterface)
 }
 
 export function disconnectDbusService(): void {
     if (!bus) return;
     bus.disconnect();
     bus = undefined;
-    legcordInterface = undefined;
+    youcordInterface = undefined;
 }

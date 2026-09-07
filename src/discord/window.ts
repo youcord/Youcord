@@ -309,7 +309,7 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
     });
 
     passedWindow.webContents.on("page-title-updated", (e, title) => {
-        const legcordSuffix = " - Legcord";
+        const youcordSuffix = " - Youcord";
         const unreadMessages = getLang("title-unreadMessages");
 
         // Helper to extract ping count from title
@@ -349,10 +349,10 @@ function doAfterDefiningTheWindow(passedWindow: BrowserWindow): void {
             }
         }
 
-        // Update window title with Legcord suffix
-        if (!title.endsWith(legcordSuffix)) {
+        // Update window title with Youcord suffix
+        if (!title.endsWith(youcordSuffix)) {
             e.preventDefault();
-            passedWindow.setTitle(title.replace("Discord |", "") + legcordSuffix);
+            passedWindow.setTitle(title.replace("Discord |", "") + youcordSuffix);
         }
     });
     injectThemesMain(passedWindow);
@@ -491,7 +491,7 @@ export function createWindow() {
         height: DEFAULT_WINDOW_HEIGHT,
         minWidth: MIN_WINDOW_WIDTH,
         minHeight: MIN_WINDOW_HEIGHT,
-        title: "Legcord",
+        title: "Youcord",
         show: false,
         darkTheme: true,
         icon: getConfig("customIcon") ?? path.join(import.meta.dirname, "../", "/assets/desktop.png"),
@@ -516,7 +516,7 @@ export function createWindow() {
             break;
         case "native":
             // On macOS, frame:true + transparent/vibrancy makes the native title bar
-            // and traffic lights invisible (Legcord#1095). Use overlay chrome instead.
+            // and traffic lights invisible (Youcord#1095). Use overlay chrome instead.
             if (os.platform() === "darwin" && getConfig("transparency") !== "none") {
                 browserWindowOptions.titleBarStyle = "hidden";
                 browserWindowOptions.titleBarOverlay = {

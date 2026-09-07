@@ -1,4 +1,4 @@
-import type { LegcordWindow } from "../../@types/legcordWindow.js";
+import type { YoucordWindow } from "../../@types/youcordWindow.js";
 import "./bridge.js";
 import "./mods/shelter.mjs";
 import "./mods/vencord.mjs";
@@ -11,10 +11,10 @@ import "./titlebar.mjs";
 import "./themes.js";
 import "./inviteBackButton.mjs";
 
-console.log("Legcord");
+console.log("Youcord");
 window.localStorage.setItem("hideNag", "true");
 declare global {
     interface Window {
-        legcord: LegcordWindow;
+        youcord: YoucordWindow;
     }
 }

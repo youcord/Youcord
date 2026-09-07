@@ -8,14 +8,14 @@ const {
 function updateVoiceState() {
     const { mute, deaf } = storesFlat.MediaEngineStore.getSettings();
     log(`[Touchbar] Setting voice state: mute: ${mute}, deaf: ${deaf}`);
-    window.legcord.touchbar.setVoiceState(mute, deaf);
+    window.youcord.touchbar.setVoiceState(mute, deaf);
 }
 
 function track(payload: { event: string; properties: { enabled: string } }) {
     if (payload.event === "join_voice_channel") {
-        window.legcord.touchbar.setVoiceTouchbar(true);
+        window.youcord.touchbar.setVoiceTouchbar(true);
     } else if (payload.event === "leave_voice_channel") {
-        window.legcord.touchbar.setVoiceTouchbar(false);
+        window.youcord.touchbar.setVoiceTouchbar(false);
     }
 }
 
@@ -30,13 +30,13 @@ function getAllGuilds() {
 }
 
 export function onLoad() {
-    if (window.legcord.platform === "darwin") {
-        log("Legcord Touchbar Integration");
+    if (window.youcord.platform === "darwin") {
+        log("Youcord Touchbar Integration");
         updateVoiceState();
         dispatcher.subscribe("TRACK", track);
         dispatcher.subscribe("AUDIO_TOGGLE_SELF_MUTE", updateVoiceState);
         dispatcher.subscribe("AUDIO_TOGGLE_SELF_DEAF", updateVoiceState);
-        setTimeout(() => window.legcord.touchbar.importGuilds(getAllGuilds()), 5000);
+        setTimeout(() => window.youcord.touchbar.importGuilds(getAllGuilds()), 5000);
     }
 }
 

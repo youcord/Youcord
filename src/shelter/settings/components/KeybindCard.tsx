@@ -13,12 +13,12 @@ export const KeybindCard = (props: { keybind: Keybind }) => {
 
     function toggleKeybind(state: boolean) {
         setSwitchState(state);
-        window.legcord.settings.toggleKeybind(props.keybind.id);
+        window.youcord.settings.toggleKeybind(props.keybind.id);
         refreshSettings();
         console.log(store.settings.keybinds);
     }
     function removeKeybind() {
-        window.legcord.settings.removeKeybind(props.keybind.id);
+        window.youcord.settings.removeKeybind(props.keybind.id);
         refreshSettings();
         console.log(store.settings.keybinds);
     }

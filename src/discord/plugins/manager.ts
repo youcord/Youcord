@@ -50,7 +50,7 @@ interface PluginMainApi {
 }
 
 const pluginFolder = path.join(app.getPath("userData"), "/plugins");
-const currentLegcordVersion = app.getVersion();
+const currentYoucordVersion = app.getVersion();
 const records = new Map<string, PluginRecord>();
 const VALID_PLUGIN_ID = /^[a-zA-Z0-9._-]{1,64}$/;
 const VALID_ENTRY_PATH = /^[^<>:"|?*\0]+$/;
@@ -136,11 +136,11 @@ function getCompatibility(manifest: PluginManifest): { compatible: boolean; mess
     if (!supported || supported.length === 0) {
         return { compatible: true };
     }
-    const compatible = supported.some((pattern) => isCompatibleVersion(pattern, currentLegcordVersion));
+    const compatible = supported.some((pattern) => isCompatibleVersion(pattern, currentYoucordVersion));
     if (compatible) return { compatible: true };
     return {
         compatible: false,
-        message: `Incompatible with Legcord ${currentLegcordVersion} (supports: ${supported.join(", ")})`,
+        message: `Incompatible with Youcord ${currentYoucordVersion} (supports: ${supported.join(", ")})`,
     };
 }
 

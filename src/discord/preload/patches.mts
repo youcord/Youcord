@@ -118,7 +118,7 @@ const version = ipcRenderer.sendSync("displayVersion") as string;
     }
     // Do NOT patch RTCRtpSender.setParameters to force high maxBitrate — that fights
     // Discord/WebRTC congestion control and collapses streams to tiny resolutions.
-    console.log("[Legcord] Early WebRTC screenshare SDP patch installed" + (preferHwH264 ? " (H264 CBP→Baseline on local+remote)" : ""));
+    console.log("[Youcord] Early WebRTC screenshare SDP patch installed" + (preferHwH264 ? " (H264 CBP→Baseline on local+remote)" : ""));
 })();`;
 
     if (document.documentElement) {
@@ -146,7 +146,7 @@ const version = ipcRenderer.sendSync("displayVersion") as string;
     const stopPrevAudioStreams = process.platform === "darwin";
     const cameraFixScript = document.createElement("script");
     cameraFixScript.textContent = `(function() {
-    var legcordStopPrevAudioStreams = ${stopPrevAudioStreams};
+    var youcordStopPrevAudioStreams = ${stopPrevAudioStreams};
     var _origGUM = navigator.mediaDevices.getUserMedia.bind(navigator.mediaDevices);
     var _activeVideoStreams = [];
     var _activeAudioStreams = [];
@@ -167,7 +167,7 @@ const version = ipcRenderer.sendSync("displayVersion") as string;
     function trackStream(stream) {
         var ref = new WeakRef(stream);
         if (stream.getVideoTracks().length > 0) _activeVideoStreams.push(ref);
-        if (legcordStopPrevAudioStreams && stream.getAudioTracks().length > 0) _activeAudioStreams.push(ref);
+        if (youcordStopPrevAudioStreams && stream.getAudioTracks().length > 0) _activeAudioStreams.push(ref);
     }
 
     navigator.mediaDevices.getUserMedia = async function(constraints) {
@@ -176,7 +176,7 @@ const version = ipcRenderer.sendSync("displayVersion") as string;
 
         // Release previous hardware when new request comes in for the same kind (audio: darwin only)
         if (hasVideo && _activeVideoStreams.length > 0) stopTrackedStreams(_activeVideoStreams, "video");
-        if (legcordStopPrevAudioStreams && hasAudio && _activeAudioStreams.length > 0) stopTrackedStreams(_activeAudioStreams, "audio");
+        if (youcordStopPrevAudioStreams && hasAudio && _activeAudioStreams.length > 0) stopTrackedStreams(_activeAudioStreams, "audio");
 
         var hasStringVideoDeviceId = hasVideo && typeof constraints.video.deviceId === "string";
         if (!hasStringVideoDeviceId) {
@@ -215,7 +215,7 @@ const version = ipcRenderer.sendSync("displayVersion") as string;
 
         // All retries exhausted or non-retryable error — fall back to original ideal constraint
         if (lastErr) {
-            console.warn("[Legcord] Exact deviceId failed, falling back to ideal:", lastErr.name, lastErr.message);
+            console.warn("[Youcord] Exact deviceId failed, falling back to ideal:", lastErr.name, lastErr.message);
         }
         var fallbackStream = await _origGUM(constraints);
         trackStream(fallbackStream);
@@ -239,7 +239,7 @@ const version = ipcRenderer.sendSync("displayVersion") as string;
 async function load() {
     await sleep(5000).then(() => {
         // Venmic audio injection lives in the Shelter screenshare getDisplayMedia patch.
-        // dirty hack to make clicking notifications focus Legcord
+        // dirty hack to make clicking notifications focus Youcord
         addScript(`
         (() => {
         const originalSetter = Object.getOwnPropertyDescriptor(Notification.prototype, "onclick").set;
@@ -247,7 +247,7 @@ async function load() {
             set(onClick) {
             originalSetter.call(this, function() {
                 onClick.apply(this, arguments);
-                legcord.window.show();
+                youcord.window.show();
             })
             },
             configurable: true
@@ -257,13 +257,15 @@ async function load() {
         addScript(`
         shelter.plugins.removePlugin("armcord-settings")
         shelter.plugins.removePlugin("armcord-screenshare")
+        shelter.plugins.removePlugin("legcord-settings")
+        shelter.plugins.removePlugin("legcord-screenshare")
     `);
         if (ipcRenderer.sendSync("getConfig", "disableAutogain")) {
-            injectJS("legcord://assets/js/disableAutogain.js");
+            injectJS("youcord://assets/js/disableAutogain.js");
         }
-        addStyle("legcord://assets/css/discord.css");
+        addStyle("youcord://assets/css/discord.css");
     });
-    injectJS("legcord://assets/js/patchVencordQuickCSS.js");
+    injectJS("youcord://assets/js/patchVencordQuickCSS.js");
 
     // Settings info version injection
     addScript(`(() => {
@@ -273,7 +275,7 @@ async function load() {
                 margin-bottom: 15px;
             }
             div[class*="compactInfo"] > span::before {
-                content: "Legcord Version: ${version}";
+                content: "Youcord Version: ${version}";
                 color: inherit;
                 position: absolute;
                 margin-top: 20px;

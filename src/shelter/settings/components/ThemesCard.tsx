@@ -14,24 +14,24 @@ export const ThemesCard = (props: { theme: ThemeManifest }) => {
     function toggleTheme(state: boolean) {
         setSwitchState(state);
         if (props.theme.id) {
-            window.legcord.themes.set(props.theme.id, state);
+            window.youcord.themes.set(props.theme.id, state);
         }
         refreshThemes();
     }
     function removeTheme() {
         if (props.theme.id) {
-            window.legcord.themes.uninstall(props.theme.id);
+            window.youcord.themes.uninstall(props.theme.id);
         }
         refreshThemes();
     }
     function editTheme() {
         if (props.theme.id) {
-            window.legcord.themes.edit(props.theme.id);
+            window.youcord.themes.edit(props.theme.id);
         }
     }
     function updateTheme() {
         if (props.theme.updateSrc) {
-            window.legcord.themes.install(props.theme.updateSrc);
+            window.youcord.themes.install(props.theme.updateSrc);
         }
         setTimeout(() => {
             refreshThemes();
@@ -44,7 +44,7 @@ export const ThemesCard = (props: { theme: ThemeManifest }) => {
     }
     function openThemesFolder() {
         if (props.theme.id) {
-            window.legcord.themes.folder(props.theme.id);
+            window.youcord.themes.folder(props.theme.id);
         }
     }
     const showUpdate = !!props.theme.updateSrc;
@@ -71,22 +71,22 @@ export const ThemesCard = (props: { theme: ThemeManifest }) => {
                     onClick={removeTheme}
                     class={`${classes.btn} ${classes.btnDanger}`}
                 >
-                    <img class={classes.icon} alt={store.i18n["themes-delete"]} src="legcord://assets/Trash.png" />
+                    <img class={classes.icon} alt={store.i18n["themes-delete"]} src="youcord://assets/Trash.png" />
                 </button>
                 <button title={store.i18n["themes-edit"]} type="button" onClick={editTheme} class={classes.btn}>
-                    <img class={classes.icon} alt={store.i18n["themes-edit"]} src="legcord://assets/Edit.png" />
+                    <img class={classes.icon} alt={store.i18n["themes-edit"]} src="youcord://assets/Edit.png" />
                 </button>
                 <Show when={showUpdate}>
                     <button title={store.i18n["themes-update"]} type="button" onClick={updateTheme} class={classes.btn}>
                         <img
                             class={classes.icon}
                             alt={store.i18n["themes-update"]}
-                            src="legcord://assets/UpgradeArrow.png"
+                            src="youcord://assets/UpgradeArrow.png"
                         />
                     </button>
                 </Show>
                 <button title={store.i18n["themes-open"]} type="button" onClick={openThemesFolder} class={classes.btn}>
-                    <img class={classes.icon} alt={store.i18n["themes-open"]} src="legcord://assets/Folder.png" />
+                    <img class={classes.icon} alt={store.i18n["themes-open"]} src="youcord://assets/Folder.png" />
                 </button>
             </div>
         </div>

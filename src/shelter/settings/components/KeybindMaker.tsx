@@ -90,7 +90,7 @@ export const KeybindMaker = (props: { close: () => void }) => {
         store.settings.keybinds = current;
         console.log(current);
         console.log(store.settings.keybinds);
-        window.legcord.settings.addKeybind(keybind);
+        window.youcord.settings.addKeybind(keybind);
     }
 
     const t = store.i18n;

@@ -28,7 +28,7 @@ void app.whenReady().then(() => {
             enabled: false,
         },
         {
-            label: "Quit Legcord",
+            label: "Quit Youcord",
             click() {
                 unlink(getConfigLocation(), (err) => {
                     if (err) throw err;

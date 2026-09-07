@@ -81,7 +81,7 @@ function getOutboundVideoSender(streamConnection: StreamConnection): RTCRtpSende
 
 /** Prefer H.264 profiles that map to platform HW encode (not OpenH264 CBP). */
 function preferPlatformHwH264(streamConnection: StreamConnection): void {
-    const platform = window.legcord.platform;
+    const platform = window.youcord.platform;
     if (platform !== "darwin" && platform !== "win32") return;
     try {
         const sender = getOutboundVideoSender(streamConnection);
@@ -298,7 +298,7 @@ function onStreamEnd(dispatch: StreamDispatch) {
     // @ts-expect-error Discord UserStore typings
     const currentUserId = UserStore.getCurrentUser().id as string;
     if (dispatch.reason === "user_requested" && owner === currentUserId) {
-        window.legcord.screenshare.venmicStop();
+        window.youcord.screenshare.venmicStop();
     }
     if (owner === currentUserId) {
         loggedEncoderForCurrentStream = false;
@@ -307,12 +307,12 @@ function onStreamEnd(dispatch: StreamDispatch) {
 }
 
 export function onLoad() {
-    log("Legcord Screenshare Module");
-    store.i18n = window.legcord.translations;
-    window.legcord.screenshare.getSources(async (_event: Electron.IpcRendererEvent, sources: IPCSources[]) => {
+    log("Youcord Screenshare Module");
+    store.i18n = window.youcord.translations;
+    window.youcord.screenshare.getSources(async (_event: Electron.IpcRendererEvent, sources: IPCSources[]) => {
         let audioSources: Node[] | undefined;
-        if (window.legcord.platform === "linux") {
-            const venmic = await window.legcord.screenshare.venmicList();
+        if (window.youcord.platform === "linux") {
+            const venmic = await window.youcord.screenshare.venmicList();
             if (venmic.ok) {
                 audioSources = venmic.targets;
                 console.log(`Venmic audio source targets: ${audioSources.map((node) => node["node.name"])}`);

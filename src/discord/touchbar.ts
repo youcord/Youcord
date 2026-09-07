@@ -45,20 +45,20 @@ export function setVoiceState(muteState: boolean, deafenState: boolean) {
 export function importGuilds(array: Array<string>) {
     console.log(tempPath);
     console.log("[Touchbar] Importing guild icons");
-    if (!existsSync(join(tempPath, "/legcordGuilds/"))) {
-        mkdirSync(join(tempPath, "/legcordGuilds/"), { recursive: true });
+    if (!existsSync(join(tempPath, "/youcordGuilds/"))) {
+        mkdirSync(join(tempPath, "/youcordGuilds/"), { recursive: true });
     }
     array.forEach(async (guild) => {
         const [guildID, guildIcon] = guild.split("/");
         const image = await fetch(`https://cdn.discordapp.com/icons/${guildID}/${guildIcon}.png`);
         const buffer = Buffer.from(await image.arrayBuffer());
-        writeFileSync(join(tempPath, `/legcordGuilds/${guildID}.png`), buffer);
+        writeFileSync(join(tempPath, `/youcordGuilds/${guildID}.png`), buffer);
     });
     refreshGuilds();
 }
 
 function refreshGuilds() {
-    const guildsPath = join(tempPath, "/legcordGuilds/");
+    const guildsPath = join(tempPath, "/youcordGuilds/");
     const guildFiles = readdirSync(guildsPath);
     guildFiles.forEach((file) => {
         guildItems.push(

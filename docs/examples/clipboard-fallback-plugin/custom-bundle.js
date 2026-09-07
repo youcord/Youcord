@@ -9,11 +9,11 @@
     };
 
     /**
-     * Legcord Clipboard Fallback
+     * Youcord Clipboard Fallback
      *
      * Discord's web UI uses navigator.clipboard.writeText for actions such as
      * "Copy User ID" and "Copy Message Link", and navigator.clipboard.write for
-     * richer clipboard payloads such as images. In some Legcord/Electron/macOS
+     * richer clipboard payloads such as images. In some Youcord/Electron/macOS
      * combinations Chromium rejects those calls because the document is not focused
      * or the clipboard permission is not granted, leaving the clipboard unchanged.
      *
@@ -21,7 +21,7 @@
      * that run inside the original click gesture.
      */
     module.exports.activate = (api) => {
-        const PATCH_KEY = Symbol.for("legcord.clipboardFallback.installed");
+        const PATCH_KEY = Symbol.for("youcord.clipboardFallback.installed");
 
         function install() {
             try {

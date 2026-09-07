@@ -313,8 +313,8 @@ function installThemeFromCode(code: string, linkOrPath?: string): void {
     if (linkOrPath && manifest.updateSrc === undefined) {
         manifest.updateSrc = linkOrPath;
     }
-    if (code.includes(".titlebar")) manifest.supportsLegcordTitlebar = true;
-    else manifest.supportsLegcordTitlebar = false;
+    if (code.includes(".titlebar")) manifest.supportsYoucordTitlebar = true;
+    else manifest.supportsYoucordTitlebar = false;
     fs.writeFileSync(path.join(themePath, "manifest.json"), JSON.stringify(manifest));
     fs.writeFileSync(path.join(themePath, "src.css"), code);
     themeCssCache.clear();
@@ -340,7 +340,7 @@ export function initQuickCss(browserWindow: BrowserWindow) {
     if (!fs.existsSync(quickCssPath)) {
         fs.writeFileSync(quickCssPath, "");
     }
-    browserWindow.webContents.send("addTheme", "legcord-quick-css", fs.readFileSync(quickCssPath, "utf-8"));
+    browserWindow.webContents.send("addTheme", "youcord-quick-css", fs.readFileSync(quickCssPath, "utf-8"));
     console.log("[Theme Manager] Loaded Quick CSS");
 
     // Performance optimization: Use fs.watch instead of fs.watchFile for better performance
@@ -360,10 +360,10 @@ export function initQuickCss(browserWindow: BrowserWindow) {
             updateTimeout = setTimeout(() => {
                 try {
                     console.log("[Theme Manager] Quick CSS updated.");
-                    browserWindow.webContents.send("removeTheme", "legcord-quick-css");
+                    browserWindow.webContents.send("removeTheme", "youcord-quick-css");
                     browserWindow.webContents.send(
                         "addTheme",
-                        "legcord-quick-css",
+                        "youcord-quick-css",
                         fs.readFileSync(quickCssPath, "utf-8"),
                     );
                 } catch (err) {
@@ -391,5 +391,5 @@ export function disableQuickCss(browserWindow: BrowserWindow) {
         quickCssWatcher.close();
         quickCssWatcher = null;
     }
-    browserWindow.webContents.send("removeTheme", "legcord-quick-css");
+    browserWindow.webContents.send("removeTheme", "youcord-quick-css");
 }

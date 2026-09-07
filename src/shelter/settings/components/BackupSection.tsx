@@ -22,9 +22,9 @@ const {
 } = shelter;
 
 type IncludeOptions = {
-    legcordConfig: boolean;
-    legcordThemesAndQuickCss: boolean;
-    legcordExtensionPlugins: boolean;
+    youcordConfig: boolean;
+    youcordThemesAndQuickCss: boolean;
+    youcordExtensionPlugins: boolean;
     vencordModData: boolean;
     equicordModData: boolean;
     shelterModData: boolean;
@@ -32,9 +32,9 @@ type IncludeOptions = {
 };
 
 const defaultIncludes: IncludeOptions = {
-    legcordConfig: true,
-    legcordThemesAndQuickCss: true,
-    legcordExtensionPlugins: true,
+    youcordConfig: true,
+    youcordThemesAndQuickCss: true,
+    youcordExtensionPlugins: true,
     vencordModData: true,
     equicordModData: true,
     shelterModData: true,
@@ -73,22 +73,22 @@ function BackupOptionsModal(props: { close: () => void; onConfirm: (includes: In
                 <Header tag={HeaderTags.H5} class={classes.modalEyebrow}>
                     {t["splash-title"]}
                 </Header>
-                <SwitchItem hideBorder value={inc().legcordConfig} onChange={(v: boolean) => patch("legcordConfig", v)}>
-                    {t["backup-includeLegcordConfig"]}
+                <SwitchItem hideBorder value={inc().youcordConfig} onChange={(v: boolean) => patch("youcordConfig", v)}>
+                    {t["backup-includeYoucordConfig"]}
                 </SwitchItem>
                 <SwitchItem
                     hideBorder
-                    value={inc().legcordThemesAndQuickCss}
-                    onChange={(v: boolean) => patch("legcordThemesAndQuickCss", v)}
+                    value={inc().youcordThemesAndQuickCss}
+                    onChange={(v: boolean) => patch("youcordThemesAndQuickCss", v)}
                 >
-                    {t["backup-includeLegcordThemes"]}
+                    {t["backup-includeYoucordThemes"]}
                 </SwitchItem>
                 <SwitchItem
                     hideBorder
-                    value={inc().legcordExtensionPlugins}
-                    onChange={(v: boolean) => patch("legcordExtensionPlugins", v)}
+                    value={inc().youcordExtensionPlugins}
+                    onChange={(v: boolean) => patch("youcordExtensionPlugins", v)}
                 >
-                    {t["backup-includeLegcordPlugins"]}
+                    {t["backup-includeYoucordPlugins"]}
                 </SwitchItem>
                 <Divider mt mb />
                 <SwitchItem
@@ -166,7 +166,7 @@ export function BackupSection(props: { embedded?: boolean }) {
             includes,
             clientMods: buildClientMods(includes),
         };
-        const result = await window.legcord.backup.save(JSON.stringify(payload));
+        const result = await window.youcord.backup.save(JSON.stringify(payload));
         if (result.ok) {
             showToast({
                 title: t["backup-successTitle"],
@@ -208,7 +208,7 @@ export function BackupSection(props: { embedded?: boolean }) {
             cancelText: t["backup-restoreCancel"],
         }).then(
             async () => {
-                const raw = await window.legcord.backup.restore();
+                const raw = await window.youcord.backup.restore();
                 let parsed: { ok?: boolean; error?: string; clientMods?: unknown };
                 try {
                     parsed = JSON.parse(raw) as typeof parsed;

@@ -87,8 +87,8 @@ const Progress = (props: { current: number; total: number }) => (
 
 const Welcome = ({ onNext, t }: { onNext: () => void; t: () => Lang }) => (
     <Motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} class="setup-welcome">
-        <img class="setup-logo" src="legcord://assets/desktop.png" alt="" />
-        <h1 class="setup-title setup-title--hero">{t()?.["setup-welcomeTitle"] ?? "Welcome to Legcord"}</h1>
+        <img class="setup-logo" src="youcord://assets/desktop.png" alt="" />
+        <h1 class="setup-title setup-title--hero">{t()?.["setup-welcomeTitle"] ?? "Welcome to Youcord"}</h1>
         <p class="setup-subtitle setup-subtitle--hero">
             {t()?.["setup-welcomeSubtitle"] ?? "Let's get you set up with your perfect configuration."}
         </p>
@@ -120,7 +120,7 @@ const WindowStyle = ({
             titleFallback: "Overlay Titlebar",
             descKey: "setup-windowStyle-overlayDesc",
             descFallback: "A modern titlebar that blends into Discord. Recommended for most users.",
-            screenshot: "legcord://assets/overlay.png",
+            screenshot: "youcord://assets/overlay.png",
             recommended: true,
         },
         {
@@ -129,15 +129,15 @@ const WindowStyle = ({
             titleFallback: "Native Window",
             descKey: "setup-windowStyle-nativeDesc",
             descFallback: "Use your system's default window decorations",
-            screenshot: "legcord://assets/native.png",
+            screenshot: "youcord://assets/native.png",
         },
         {
             id: "default",
             titleKey: "setup-windowStyle-customTitle",
             titleFallback: "Custom Titlebar",
             descKey: "setup-windowStyle-customDesc",
-            descFallback: "Use Legcord's custom titlebar design",
-            screenshot: "legcord://assets/custom.png",
+            descFallback: "Use Youcord's custom titlebar design",
+            screenshot: "youcord://assets/custom.png",
         },
     ];
     const lang = t();
@@ -147,7 +147,7 @@ const WindowStyle = ({
             <div class="setup-header">
                 <h2 class="setup-title">{lang?.["setup-chooseWindowStyle"] ?? "Choose Window Style"}</h2>
                 <p class="setup-subtitle">
-                    {lang?.["setup-selectAppearance"] ?? "Select how Legcord appears on your machine"}
+                    {lang?.["setup-selectAppearance"] ?? "Select how Youcord appears on your machine"}
                 </p>
             </div>
 
@@ -184,14 +184,14 @@ const TraySettings = ({
             titleKey: "setup-trayEnableTitle",
             titleFallback: "Enable Tray Icon",
             descKey: "setup-trayEnableDesc",
-            descFallback: "Show Legcord in your system tray",
+            descFallback: "Show Youcord in your system tray",
         },
         {
             id: "disabled",
             titleKey: "setup-trayDisableTitle",
             titleFallback: "Disable Tray Icon",
             descKey: "setup-trayDisableDesc",
-            descFallback: "Don't show Legcord in your system tray",
+            descFallback: "Don't show Youcord in your system tray",
         },
     ];
     const lang = t();
@@ -248,12 +248,12 @@ const Finish = ({ restart, t }: { restart: () => void; t: () => Lang }) => (
         <h1 class="setup-title setup-title--hero">{t()?.["setup-finishTitle"] ?? "You're All Set!"}</h1>
         <p class="setup-subtitle setup-subtitle--hero">
             {t()?.["setup-finishSubtitle"] ??
-                "Your Legcord configuration is complete and personalized to your preferences."}
+                "Your Youcord configuration is complete and personalized to your preferences."}
         </p>
         <div class="setup-note">
             <p>
                 {t()?.["setup-finishSettingsNote"] ??
-                    "Need to make changes later? You'll find all these options in Discord's settings menu under Legcord."}
+                    "Need to make changes later? You'll find all these options in Discord's settings menu under Youcord."}
             </p>
         </div>
         <Button
@@ -263,7 +263,7 @@ const Finish = ({ restart, t }: { restart: () => void; t: () => Lang }) => (
             class="setup-cta"
             style={ctaStyle}
         >
-            {t()?.["setup-launchLegcord"] ?? "Launch Legcord"}
+            {t()?.["setup-launchYoucord"] ?? "Launch Youcord"}
         </Button>
     </Motion.div>
 );
@@ -283,9 +283,9 @@ const ModSelector = ({
             titleKey: "setup-shelterOnlyTitle",
             titleFallback: "Shelter Only",
             descKey: "setup-shelterOnlyDesc",
-            descFallback: "Legcord was built around Shelter. Most typical users won't need another client mod.",
+            descFallback: "Youcord was built around Shelter. Most typical users won't need another client mod.",
             recommended: true,
-            icon: "legcord://assets/shelter.svg",
+            icon: "youcord://assets/shelter.svg",
         },
         {
             id: "vencord",
@@ -293,7 +293,7 @@ const ModSelector = ({
             titleFallback: "Vencord",
             descKey: "setup-vencordDesc",
             descFallback: "Client mod with plugins and themes.",
-            icon: "legcord://assets/vencord.png",
+            icon: "youcord://assets/vencord.png",
         },
         {
             id: "equicord",
@@ -301,7 +301,7 @@ const ModSelector = ({
             titleFallback: "Equicord",
             descKey: "setup-equicordDesc",
             descFallback: "A fork of Vencord with more plugins.",
-            icon: "legcord://assets/equicord.png",
+            icon: "youcord://assets/equicord.png",
         },
     ];
     const lang = t();
@@ -312,7 +312,7 @@ const ModSelector = ({
                 <h2 class="setup-title">{lang?.["setup-modSelectorTitle"] ?? "Choose Your Client Mod"}</h2>
                 <p class="setup-subtitle">
                     {lang?.["setup-modSelectorSubtitle"] ??
-                        "Legcord includes Shelter out of the box, but you can also choose another client mod if wanted."}
+                        "Youcord includes Shelter out of the box, but you can also choose another client mod if wanted."}
                 </p>
             </div>
 

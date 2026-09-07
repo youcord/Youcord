@@ -1,6 +1,6 @@
 /**
  * Main process entry example.
- * Receives api from Legcord plugin manager.
+ * Receives api from Youcord plugin manager.
  */
 module.exports.activate = (api) => {
     api.logger.log("main entry active");

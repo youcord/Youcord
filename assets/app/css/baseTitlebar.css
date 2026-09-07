@@ -20,7 +20,7 @@
 }
 
 .window-title {
-    content: url("legcord://assets/Wordmark.png");
+    content: url("youcord://assets/Wordmark.png");
     height: 15px;
     margin-left: initial;
     transform: translate(9px, 9px);

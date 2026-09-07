@@ -13,7 +13,7 @@ async function listen(msg: {
         name: string;
     };
 }) {
-    if (!window.legcordRPC) return;
+    if (!window.youcordRPC) return;
 
     // Handle game closing by dispatching update to clear status
     if (!msg.activity) {
@@ -27,7 +27,7 @@ async function listen(msg: {
     const gameName = msg.activity.name || app.name;
     if (!msg.activity.name) msg.activity.name = gameName;
 
-    const rpc = window.legcordRPC;
+    const rpc = window.youcordRPC;
     const entry = { name: gameName, id: appId };
     rpc.lastDetectedGames = [entry, ...(rpc.lastDetectedGames || []).filter((g) => g.id !== appId)].slice(
         0,
@@ -35,7 +35,7 @@ async function listen(msg: {
     );
     rpc.onLastDetectedUpdate?.(rpc.lastDetectedGames);
 
-    const blacklist = window.legcord.rpc.getBlacklist();
+    const blacklist = window.youcord.rpc.getBlacklist();
     if (blacklist.some((g) => g.id === Number(appId))) {
         // @ts-expect-error
         msg.activity = null; // clear activity to prevent blacklisted game from showing up in status
@@ -63,7 +63,7 @@ async function listen(msg: {
 }
 
 export function onLoad() {
-    window.legcordRPC = {
+    window.youcordRPC = {
         lastDetectedGames: [],
         onLastDetectedUpdate: null,
         listen,

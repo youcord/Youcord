@@ -17,7 +17,7 @@ export const DetectableCard = (props: { detectable: Game; onRemove: () => void }
             cancelText: store.i18n["settings-restartLater"],
         }).then(
             () => {
-                window.legcord.rpc.removeDetectable(props.detectable.id);
+                window.youcord.rpc.removeDetectable(props.detectable.id);
                 setRestartRequired();
                 props.onRemove();
             },
@@ -42,7 +42,7 @@ export const DetectableCard = (props: { detectable: Game; onRemove: () => void }
                 <Header tag={HeaderTags.H5}>{executablesLabel}</Header>
             </div>
             <button title={store.i18n["games-remove"]} type="button" onClick={removeDetectable} class={classes.btn}>
-                <img class={classes.icon} alt={store.i18n["games-remove"]} src="legcord://assets/Trash.png" />
+                <img class={classes.icon} alt={store.i18n["games-remove"]} src="youcord://assets/Trash.png" />
             </button>
         </div>
     );

@@ -5,13 +5,13 @@ import { app } from "electron";
 import type { Settings } from "../@types/settings.js";
 import { setConfigBulk } from "./config.js";
 
-export const LEGCORD_BACKUP_VERSION = 1;
+export const YOUCORD_BACKUP_VERSION = 1;
 export const MANIFEST_ENTRY = "manifest.json";
 
 export interface BackupIncludeOptions {
-    legcordConfig: boolean;
-    legcordThemesAndQuickCss: boolean;
-    legcordExtensionPlugins: boolean;
+    youcordConfig: boolean;
+    youcordThemesAndQuickCss: boolean;
+    youcordExtensionPlugins: boolean;
     vencordModData: boolean;
     equicordModData: boolean;
     shelterModData: boolean;
@@ -30,7 +30,7 @@ export interface BackupSavePayload {
 }
 
 export interface BackupManifest extends BackupSavePayload {
-    version: typeof LEGCORD_BACKUP_VERSION;
+    version: typeof YOUCORD_BACKUP_VERSION;
     createdAt: string;
     appVersion: string;
 }
@@ -96,7 +96,7 @@ export function buildBackupZipBuffer(payload: BackupSavePayload, paths: BackupPa
     }
 
     const manifest: BackupManifest = {
-        version: LEGCORD_BACKUP_VERSION,
+        version: YOUCORD_BACKUP_VERSION,
         createdAt: new Date().toISOString(),
         appVersion: app.getVersion(),
         includes,
@@ -107,14 +107,14 @@ export function buildBackupZipBuffer(payload: BackupSavePayload, paths: BackupPa
         { name: MANIFEST_ENTRY, data: Buffer.from(JSON.stringify(manifest, null, 2), "utf-8") },
     ];
 
-    if (includes.legcordConfig && existsSync(paths.getConfigLocation())) {
+    if (includes.youcordConfig && existsSync(paths.getConfigLocation())) {
         addFileIfExists(entries, paths.getConfigLocation(), "data/storage/settings.json");
     }
-    if (includes.legcordThemesAndQuickCss) {
+    if (includes.youcordThemesAndQuickCss) {
         addFileIfExists(entries, paths.quickCssPath, "data/quickCss.css");
         entries.push(...walkFiles(paths.themesPath, "data/themes"));
     }
-    if (includes.legcordExtensionPlugins) {
+    if (includes.youcordExtensionPlugins) {
         entries.push(...walkFiles(paths.extensionsPath, "data/plugins"));
         entries.push(...walkFiles(paths.pluginsPath, "data/runtime-plugins"));
         entries.push(...walkFiles(paths.pluginStoragePath, "data/plugin-storage"));
@@ -159,7 +159,7 @@ export function applyBackupFromMap(
     const raw = map.get(MANIFEST_ENTRY);
     if (!raw) throw new Error("Missing manifest.json");
     const manifest = JSON.parse(raw.toString("utf8")) as BackupManifest;
-    if (manifest.version !== LEGCORD_BACKUP_VERSION) {
+    if (manifest.version !== YOUCORD_BACKUP_VERSION) {
         throw new Error(`Unsupported backup version: ${String(manifest.version)}`);
     }
 
@@ -169,7 +169,7 @@ export function applyBackupFromMap(
         if (name === MANIFEST_ENTRY) continue;
 
         if (name.startsWith("data/storage/")) {
-            if (!inc.legcordConfig) continue;
+            if (!inc.youcordConfig) continue;
             const rest = name.slice("data/storage/".length);
             if (rest !== "settings.json") continue;
             const dest = paths.getConfigLocation();
@@ -179,13 +179,13 @@ export function applyBackupFromMap(
         }
 
         if (name === "data/quickCss.css") {
-            if (!inc.legcordThemesAndQuickCss) continue;
+            if (!inc.youcordThemesAndQuickCss) continue;
             writeFileEnsuringDirs(paths.quickCssPath, data);
             continue;
         }
 
         if (name.startsWith("data/themes/")) {
-            if (!inc.legcordThemesAndQuickCss) continue;
+            if (!inc.youcordThemesAndQuickCss) continue;
             const rest = name.slice("data/themes/".length);
             const dest = resolvePathUnderBaseDir(paths.themesPath, rest);
             if (!dest) {
@@ -197,7 +197,7 @@ export function applyBackupFromMap(
         }
 
         if (name.startsWith("data/plugins/")) {
-            if (!inc.legcordExtensionPlugins) continue;
+            if (!inc.youcordExtensionPlugins) continue;
             const rest = name.slice("data/plugins/".length);
             const dest = resolvePathUnderBaseDir(paths.extensionsPath, rest);
             if (!dest) {
@@ -209,7 +209,7 @@ export function applyBackupFromMap(
         }
 
         if (name.startsWith("data/runtime-plugins/")) {
-            if (!inc.legcordExtensionPlugins) continue;
+            if (!inc.youcordExtensionPlugins) continue;
             const rest = name.slice("data/runtime-plugins/".length);
             const dest = resolvePathUnderBaseDir(paths.pluginsPath, rest);
             if (!dest) {
@@ -221,7 +221,7 @@ export function applyBackupFromMap(
         }
 
         if (name.startsWith("data/plugin-storage/")) {
-            if (!inc.legcordExtensionPlugins) continue;
+            if (!inc.youcordExtensionPlugins) continue;
             const rest = name.slice("data/plugin-storage/".length);
             const dest = resolvePathUnderBaseDir(paths.pluginStoragePath, rest);
             if (!dest) {

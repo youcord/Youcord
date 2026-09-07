@@ -5,7 +5,7 @@ import type { Keybind } from "./keybind.js";
 import type { Settings } from "./settings.js";
 import type { ThemeManifest } from "./themeManifest.js";
 
-export interface LegcordPluginInfo {
+export interface YoucordPluginInfo {
     id: string;
     name: string;
     version: string;
@@ -20,7 +20,7 @@ export interface LegcordPluginInfo {
     hasRenderer: boolean;
 }
 
-export interface LegcordWindow {
+export interface YoucordWindow {
     window: {
         show: () => void;
         hide: () => void;
@@ -110,12 +110,12 @@ export interface LegcordWindow {
         restore(): Promise<string>;
     };
     plugins: {
-        list: () => Promise<LegcordPluginInfo[]>;
+        list: () => Promise<YoucordPluginInfo[]>;
         setEnabled: (id: string, enabled: boolean) => Promise<{ ok: boolean }>;
         reload: (id: string) => Promise<{ ok: boolean }>;
         openFolder: () => void;
     };
-    /** Plugin storage API. Requires user to enable "Extended plugin abilities" in Legcord settings. */
+    /** Plugin storage API. Requires user to enable "Extended plugin abilities" in Youcord settings. */
     fs: {
         writeFile: (
             pluginId: string,
@@ -134,7 +134,7 @@ export interface DetectedGame {
     id: number;
 }
 
-export interface LegcordRPC {
+export interface YoucordRPC {
     lastDetectedGames: DetectedGame[];
     onLastDetectedUpdate: ((list: DetectedGame[]) => void) | null;
     listen: (msg: {
@@ -148,6 +148,6 @@ export interface LegcordRPC {
 
 declare global {
     interface Window {
-        legcordRPC?: LegcordRPC;
+        youcordRPC?: YoucordRPC;
     }
 }

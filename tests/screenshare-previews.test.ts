@@ -63,7 +63,7 @@ describe("serializeCapturerSources", () => {
                 thumbnail: fakeImage(sameFrame),
                 appIcon: fakeImage("data:image/png;base64,JOKELICON"),
             },
-            { id: "window:9:0", name: "Legcord Screen Share Low FP", thumbnail: fakeImage(sameFrame) },
+            { id: "window:9:0", name: "Youcord Screen Share Low FP", thumbnail: fakeImage(sameFrame) },
         ];
 
         const result = serializeCapturerSources(sources);

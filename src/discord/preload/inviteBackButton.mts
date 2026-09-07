@@ -8,12 +8,12 @@ document.addEventListener("DOMContentLoaded", () => {
             ((await ipcRenderer.invoke("getLang", "invite-goBackToApp")) as string | undefined) ||
             "Go back to the Discord app";
 
-        addStyle("legcord://assets/css/inviteBack.css");
+        addStyle("youcord://assets/css/inviteBack.css");
 
         // Injected into the page world so Discord SPA history.pushState/replaceState is visible.
         addScript(`
 (() => {
-    const BTN_ID = "legcord-invite-back";
+    const BTN_ID = "youcord-invite-back";
     const LABEL = ${JSON.stringify(label)};
 
     function isInvitePath(pathname) {

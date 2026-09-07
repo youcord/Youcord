@@ -20,7 +20,7 @@ export const AboutPopup = (props: { close: () => void }) => {
     const [error, setError] = createSignal<string | null>(null);
 
     onMount(() => {
-        fetch("https://api.github.com/repos/Legcord/Legcord/contributors")
+        fetch("https://api.github.com/repos/nightcordlegit/youcord/contributors")
             .then((response) => {
                 if (!response.ok) throw new Error("Failed to fetch contributors");
                 return response.json();
@@ -108,9 +108,9 @@ export const AboutPopup = (props: { close: () => void }) => {
                             </svg>
                         </div>
                         <span class={classes.aboutVersion}>
-                            {window.legcord?.version === "0.0.0"
+                            {window.youcord?.version === "0.0.0"
                                 ? "Dev Build"
-                                : `v${window.legcord?.version ?? "1.3.0"}`}
+                                : `v${window.youcord?.version ?? "1.3.0"}`}
                         </span>
                         <p class={classes.aboutDescription}>
                             A free and open-source Discord client crafted by the community, for the community —
@@ -124,7 +124,7 @@ export const AboutPopup = (props: { close: () => void }) => {
                             <button
                                 type="button"
                                 class={classes.quickActionButton}
-                                onClick={() => window.open("https://github.com/Legcord/Legcord", "_blank")}
+                                onClick={() => window.open("https://github.com/nightcordlegit/youcord", "_blank")}
                             >
                                 <span class={classes.quickActionButtonIcon}>
                                     <svg
@@ -144,7 +144,7 @@ export const AboutPopup = (props: { close: () => void }) => {
                                 </span>
                                 <span class={classes.quickActionButtonLabel}>
                                     <span class={classes.quickActionButtonTitle}>View Source Code</span>
-                                    <span class={classes.quickActionButtonDesc}>github.com/Legcord/Legcord</span>
+                                    <span class={classes.quickActionButtonDesc}>github.com/nightcordlegit/youcord</span>
                                 </span>
                                 <svg
                                     class={classes.quickActionButtonArrow}
@@ -288,7 +288,7 @@ export const AboutPopup = (props: { close: () => void }) => {
                     </div>
 
                     <div class={classes.aboutFooter}>
-                        <span>Copyright &copy; Legcord 2024-2026 &middot; OSL-3.0</span>
+                        <span>Copyright &copy; Youcord 2024-2026 &middot; OSL-3.0</span>
                     </div>
                 </div>
             </ModalBody>

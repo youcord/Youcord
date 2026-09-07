@@ -4,8 +4,8 @@ import { AppImageUpdater, DebUpdater, MacUpdater } from "electron-updater";
 
 const updateProvider: AllPublishOptions = {
     provider: "github",
-    repo: "Legcord",
-    owner: "Legcord",
+    repo: "youcord",
+    owner: "nightcordlegit",
 };
 
 if (platform() === "darwin") {

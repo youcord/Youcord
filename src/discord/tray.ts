@@ -34,7 +34,7 @@ export function createTray() {
     tray = new Tray(trayImg);
     const contextMenu = Menu.buildFromTemplate([
         {
-            label: `${getLang("menu-legcord")} ${getDisplayVersion()}`,
+            label: `${getLang("menu-youcord")} ${getDisplayVersion()}`,
             icon: trayImg,
             enabled: false,
         },
@@ -42,7 +42,7 @@ export function createTray() {
             type: "separator",
         },
         {
-            label: getLang("tray-openLegcord"),
+            label: getLang("tray-openYoucord"),
             click() {
                 mainWindows.forEach((mainWindow) => {
                     revealWindow(mainWindow);
@@ -69,13 +69,13 @@ export function createTray() {
             type: "separator",
         },
         {
-            label: getLang("tray-restartLegcord"),
+            label: getLang("tray-restartYoucord"),
             click() {
                 handleRestart();
             },
         },
         {
-            label: getLang("tray-quitLegcord"),
+            label: getLang("tray-quitYoucord"),
             click() {
                 setForceQuit(true);
                 app.quit();

@@ -19,7 +19,7 @@ export function ThemesPage() {
     refreshThemes();
 
     function installTheme() {
-        window.legcord.themes.install(downloadUrl());
+        window.youcord.themes.install(downloadUrl());
         setDownloadUrl("");
         setTimeout(() => {
             refreshThemes();
@@ -44,9 +44,9 @@ export function ThemesPage() {
                 onChange={(e: boolean) => {
                     console.log("Toggled quick CSS", e);
                     if (e) {
-                        window.legcord.themes.enableQuickCss();
+                        window.youcord.themes.enableQuickCss();
                     } else {
-                        window.legcord.themes.disableQuickCss();
+                        window.youcord.themes.disableQuickCss();
                     }
                     setConfig("quickCss", e);
                 }}
@@ -56,21 +56,21 @@ export function ThemesPage() {
             <div class={classes.toolbar}>
                 <Button
                     size={ButtonSizes.LARGE}
-                    onClick={window.legcord.themes.openQuickCss}
+                    onClick={window.youcord.themes.openQuickCss}
                     disabled={!settings().quickCss}
                 >
                     {t["themes-openQuickCss"]}
                 </Button>
-                <Button size={ButtonSizes.LARGE} onClick={window.legcord.themes.openImportPicker}>
+                <Button size={ButtonSizes.LARGE} onClick={window.youcord.themes.openImportPicker}>
                     {t["themes-importFromFile"]}
                 </Button>
-                <Button size={ButtonSizes.LARGE} onClick={window.legcord.settings.openThemesFolder}>
+                <Button size={ButtonSizes.LARGE} onClick={window.youcord.settings.openThemesFolder}>
                     {t["themes-openThemesFolder"]}
                 </Button>
                 <Button
                     size={ButtonSizes.LARGE}
                     onClick={() => {
-                        store.themes = window.legcord.themes.refresh();
+                        store.themes = window.youcord.themes.refresh();
                     }}
                 >
                     {t["themes-refresh"]}

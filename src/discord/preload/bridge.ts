@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 import type { Game } from "arrpc";
 import type { Keybind } from "../../@types/keybind.js";
-import type { LegcordWindow } from "../../@types/legcordWindow.d.ts";
+import type { YoucordWindow } from "../../@types/youcordWindow.d.ts";
 import type { Settings } from "../../@types/settings.js";
 import type { ThemeManifest } from "../../@types/themeManifest.js";
 import type { AppliedFlagsOutput } from "../../main.js";
@@ -14,7 +14,7 @@ interface IPCSources {
     thumbnail: string;
     appIcon?: string;
 }
-interface LegcordPluginInfo {
+interface YoucordPluginInfo {
     id: string;
     name: string;
     version: string;
@@ -29,7 +29,7 @@ interface LegcordPluginInfo {
     hasRenderer: boolean;
 }
 
-contextBridge.exposeInMainWorld("legcord", {
+contextBridge.exposeInMainWorld("youcord", {
     window: {
         show: () => ipcRenderer.send("win-show"),
         hide: () => ipcRenderer.send("win-hide"),
@@ -130,7 +130,7 @@ contextBridge.exposeInMainWorld("legcord", {
         restore: () => ipcRenderer.invoke("backupRestore") as Promise<string>,
     },
     plugins: {
-        list: () => ipcRenderer.invoke("plugins:list") as Promise<LegcordPluginInfo[]>,
+        list: () => ipcRenderer.invoke("plugins:list") as Promise<YoucordPluginInfo[]>,
         setEnabled: (id: string, enabled: boolean) =>
             ipcRenderer.invoke("plugins:set-enabled", id, enabled) as Promise<{ ok: boolean }>,
         reload: (id: string) => ipcRenderer.invoke("plugins:reload", id) as Promise<{ ok: boolean }>,
@@ -139,7 +139,7 @@ contextBridge.exposeInMainWorld("legcord", {
     fs: {
         /**
          * Write a file in this plugin's scoped storage (e.g. "cache/deleted-messages.json").
-         * Only works when the user has enabled "Extended plugin abilities" in Legcord settings.
+         * Only works when the user has enabled "Extended plugin abilities" in Youcord settings.
          * @param pluginId - Your plugin id (alphanumeric, dash, underscore only)
          * @param relativePath - Path relative to plugin storage (no ".." allowed)
          * @returns { ok: true } or { ok: false, error: "EXTENSION_DISABLED" | "INVALID_PATH" | ... }
@@ -150,7 +150,7 @@ contextBridge.exposeInMainWorld("legcord", {
             >,
         /**
          * Read a file from this plugin's scoped storage.
-         * Only works when the user has enabled "Extended plugin abilities" in Legcord settings.
+         * Only works when the user has enabled "Extended plugin abilities" in Youcord settings.
          * @param pluginId - Your plugin id
          * @param relativePath - Path relative to plugin storage
          * @returns { ok: true, data: string } or { ok: false, error: "EXTENSION_DISABLED" | "NOT_FOUND" | ... }
@@ -160,4 +160,4 @@ contextBridge.exposeInMainWorld("legcord", {
                 { ok: true; data: string } | { ok: false; error: string }
             >,
     },
-} as unknown as LegcordWindow);
+} as unknown as YoucordWindow);

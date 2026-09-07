@@ -4,13 +4,13 @@ import classes from "./HeroUpdater.module.css";
 const {
     ui: { Button, ButtonSizes, Header, HeaderTags, Text, ButtonColors },
 } = shelter;
-const LOGO_URL = "https://github.com/Legcord/Branding/raw/main/assets/legcord-banner.png";
+const LOGO_URL = "https://github.com/nightcordlegit/youcord/blob/main/static/icon.png";
 
 async function checkForUpdates() {
     const response = await fetch("https://legcord.app/latest.json");
     const data = await response.json();
     const remoteVersion = data.version.replace(/\./g, ""); // easy to compare
-    if (remoteVersion > window.legcord.version.replace(/\./g, "")) {
+    if (remoteVersion > window.youcord.version.replace(/\./g, "")) {
         return true;
     } else {
         return false;

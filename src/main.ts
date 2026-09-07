@@ -138,7 +138,7 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     // kill if 2nd instance
     app.quit();
 } else {
-    app.setAppUserModelId("app.legcord.Legcord");
+    app.setAppUserModelId("app.youcord.Youcord");
 
     const enableFeatures = new Set(app.commandLine.getSwitchValue("enable-features").split(","));
     const disableFeatures = new Set(app.commandLine.getSwitchValue("disable-features").split(","));
@@ -257,6 +257,7 @@ if (!app.requestSingleInstanceLock() && getConfig("multiInstance") === false) {
     // @ts-expect-error old types
     if (getConfig("performanceMode") === "vaapi") setConfig("vaapi", true);
     // @ts-expect-error old types
+    // legacy key from before the rename to Youcord, kept to migrate existing configs
     if (getConfig("legcordCSP") === true) {
         setConfig("csp", "none");
         // @ts-expect-error old types

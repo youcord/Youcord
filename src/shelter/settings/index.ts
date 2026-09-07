@@ -27,14 +27,14 @@ let settingsCleanups: (() => void)[] = [];
 function registerSections(): (() => void)[] {
     const array = [
         registerSection("divider"),
-        registerSection("header", "Legcord"),
-        registerSection("section", "legcord-settings", "Settings", SettingsPage, { icon: SettingsSidebarIcon }),
-        registerSection("section", "legcord-themes", "Themes", ThemesPage, { icon: ThemesSidebarIcon }),
-        registerSection("section", "legcord-keybinds", "Keybinds", KeybindsPage, { icon: KeybindsSidebarIcon }),
-        registerSection("section", "legcord-games", "Games", RegisteredGamesPage, { icon: GamesSidebarIcon }),
+        registerSection("header", "Youcord"),
+        registerSection("section", "youcord-settings", "Settings", SettingsPage, { icon: SettingsSidebarIcon }),
+        registerSection("section", "youcord-themes", "Themes", ThemesPage, { icon: ThemesSidebarIcon }),
+        registerSection("section", "youcord-keybinds", "Keybinds", KeybindsPage, { icon: KeybindsSidebarIcon }),
+        registerSection("section", "youcord-games", "Games", RegisteredGamesPage, { icon: GamesSidebarIcon }),
     ];
-    if (window.legcord.settings.getConfig().showExperimentalPluginMenu) {
-        array.push(registerSection("section", "legcord-plugins", "Plugins", PluginsPage, { icon: PluginsSidebarIcon }));
+    if (window.youcord.settings.getConfig().showExperimentalPluginMenu) {
+        array.push(registerSection("section", "youcord-plugins", "Plugins", PluginsPage, { icon: PluginsSidebarIcon }));
     }
     return array;
 }
@@ -42,7 +42,7 @@ function registerSections(): (() => void)[] {
 function restartRequired(payload: { event: string; properties: { origin_pane: string } }) {
     if (payload.event === "settings_pane_viewed" && typeof payload.properties.origin_pane !== "undefined") {
         const pane = payload.properties.origin_pane;
-        if ((pane === "legcord-settings" || pane === "legcord-games") && isRestartRequired) {
+        if ((pane === "youcord-settings" || pane === "youcord-games") && isRestartRequired) {
             openConfirmationModal({
                 header: () => store.i18n?.["settings-restartRequired"] ?? "Restart required",
                 body: () => store.i18n?.["settings-restartRequiredBody"] ?? "A restart is required to apply changes.",
@@ -50,7 +50,7 @@ function restartRequired(payload: { event: string; properties: { origin_pane: st
                 confirmText: store.i18n?.["settings-restart"] ?? "Restart",
                 cancelText: store.i18n?.["settings-restartLater"] ?? "Later",
             }).then(
-                () => window.legcord.restart(),
+                () => window.youcord.restart(),
                 () => console.log("restart skipped"),
             );
         }
@@ -61,9 +61,9 @@ export function onLoad() {
     refreshSettings();
     refreshThemes();
     // used for restart required dialog later
-    store.i18n = window.legcord.translations;
-    log("Legcord Settings");
-    window.legcord.settings.setLang(storesFlat.LocaleStore.locale);
+    store.i18n = window.youcord.translations;
+    log("Youcord Settings");
+    window.youcord.settings.setLang(storesFlat.LocaleStore.locale);
     settingsCleanups = registerSections();
     dispatcher.subscribe("TRACK", restartRequired);
 }

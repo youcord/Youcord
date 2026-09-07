@@ -1,6 +1,6 @@
 import type { GameList, ProcessInfo } from "arrpc";
 import { createSignal, For, onCleanup, onMount, Show } from "solid-js";
-import type { DetectedGame } from "../../../@types/legcordWindow.d.ts";
+import type { DetectedGame } from "../../../@types/youcordWindow.d.ts";
 import { sleep } from "../../../common/sleep.js";
 import { AddDetectableModal } from "../components/AddDetectableModal.jsx";
 import { DetectableCard } from "../components/DetectableCard.jsx";
@@ -14,7 +14,7 @@ const {
 } = shelter;
 
 function formatProcessName(processName: string) {
-    if (window.legcord.platform === "darwin") {
+    if (window.youcord.platform === "darwin") {
         return processName.split("/").filter(Boolean).at(-1) ?? processName;
     }
 
@@ -29,25 +29,25 @@ export function RegisteredGamesPage() {
     const [blacklistVersion, setBlacklistVersion] = createSignal(0);
 
     function refreshDetectables() {
-        window.legcord.rpc.refreshProcessList();
-        setDetectables(window.legcord.rpc.getDetectables());
+        window.youcord.rpc.refreshProcessList();
+        setDetectables(window.youcord.rpc.getDetectables());
         sleep(500).then(() => {
-            setProcessList(window.legcord.rpc.getProcessList());
+            setProcessList(window.youcord.rpc.getProcessList());
         });
     }
 
     function getBlacklist(): DetectedGame[] {
-        return window.legcord.rpc.getBlacklist();
+        return window.youcord.rpc.getBlacklist();
     }
 
     function blacklistGame(name: string, id: number) {
-        window.legcord.rpc.blacklistGame(name, id);
+        window.youcord.rpc.blacklistGame(name, id);
         setBlacklistVersion((v) => v + 1);
         setLastDetected((list) => filterBlacklisted(list));
     }
 
     function unblacklistGame(id: number) {
-        window.legcord.rpc.unblacklistGame(id);
+        window.youcord.rpc.unblacklistGame(id);
         setBlacklistVersion((v) => v + 1);
     }
 
@@ -65,7 +65,7 @@ export function RegisteredGamesPage() {
 
     onMount(() => {
         refreshDetectables();
-        const rpc = window.legcordRPC;
+        const rpc = window.youcordRPC;
         if (rpc) {
             setLastDetected(filterBlacklisted(rpc.lastDetectedGames ?? []));
             rpc.onLastDetectedUpdate = (list) => setLastDetected(filterBlacklisted(list ?? []));

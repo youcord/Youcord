@@ -3,7 +3,7 @@ import type { BrowserWindow } from "electron";
 let scriptCounter = 0;
 
 export function addStyle(styleUrl: string): void {
-    const id = `legcord-style-${styleUrl.replace(/[^a-zA-Z0-9]/g, "-")}`;
+    const id = `youcord-style-${styleUrl.replace(/[^a-zA-Z0-9]/g, "-")}`;
     if (document.getElementById(id)) return;
     const style = document.createElement("link");
     style.id = id;
@@ -22,7 +22,7 @@ export function addTheme(id: string, styleString: string): void {
 }
 
 export function addScript(scriptString: string): void {
-    const id = `legcord-script-${++scriptCounter}`;
+    const id = `youcord-script-${++scriptCounter}`;
     if (document.getElementById(id)) return;
     const script = document.createElement("script");
     script.id = id;
@@ -31,7 +31,7 @@ export function addScript(scriptString: string): void {
 }
 
 export async function injectJS(inject: string): Promise<void> {
-    const id = `legcord-inject-${inject.replace(/[^a-zA-Z0-9]/g, "-")}`;
+    const id = `youcord-inject-${inject.replace(/[^a-zA-Z0-9]/g, "-")}`;
     if (document.getElementById(id)) return;
     const js = await (await fetch(`${inject}`)).text();
     const el = document.createElement("script");
@@ -43,7 +43,7 @@ export async function injectJS(inject: string): Promise<void> {
 export function navigateTo(passedWindow: BrowserWindow, url: string): void {
     // Sanitize: only allow path-like URLs (no protocol, no quotes)
     const sanitized = url.replace(/[^a-zA-Z0-9/_\-@.]/g, "");
-    console.log(`[legcord deeplink] Navigating to ${sanitized}`);
+    console.log(`[youcord deeplink] Navigating to ${sanitized}`);
     passedWindow.webContents.executeJavaScript(
         `history.pushState({}, null, ${JSON.stringify(sanitized)});window.dispatchEvent(new PopStateEvent("popstate", {}));`,
     );

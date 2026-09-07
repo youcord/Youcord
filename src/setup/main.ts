@@ -69,6 +69,6 @@ export async function createSetupWindow(): Promise<void> {
             // workaround electron trying to relaunch from squashfs
             handleRestart();
         });
-        void setupWindow.loadURL("legcord://html/setup.html");
+        void setupWindow.loadURL("youcord://html/setup.html");
     });
 }

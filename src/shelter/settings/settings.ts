@@ -11,11 +11,11 @@ export function setRestartRequired() {
 }
 
 export function refreshSettings() {
-    store.settings = window.legcord.settings.getConfig();
+    store.settings = window.youcord.settings.getConfig();
 }
 
 export function refreshThemes() {
-    store.themes = window.legcord.themes.getThemes();
+    store.themes = window.youcord.themes.getThemes();
 }
 
 /** Nearest scrollable ancestor — Discord's settings content scroller. */
@@ -85,7 +85,7 @@ export function setConfig<K extends keyof Settings>(key: K, value: Settings[K], 
         if (shouldRestart) {
             isRestartRequired = true;
         }
-        window.legcord.settings.setConfig(key, value);
+        window.youcord.settings.setConfig(key, value);
     });
 }
 
@@ -108,7 +108,7 @@ export function toggleMod(mod: ValidMods, enabled: boolean) {
 }
 
 export function isMinWindowsVersion(major: number, minor: number, build: number) {
-    const [sys_major, sys_minor, sys_build] = window.legcord.osRelease
+    const [sys_major, sys_minor, sys_build] = window.youcord.osRelease
         .split(".")
         .map((val, _, __) => Number.parseInt(val, 10));
     return sys_major >= major && sys_minor >= minor && sys_build >= build;

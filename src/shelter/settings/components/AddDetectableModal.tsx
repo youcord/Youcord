@@ -45,7 +45,7 @@ export const AddDetectableModal = (props: { close: () => void; executable: strin
                 {
                     name: props.executable,
                     is_launcher: false,
-                    os: window.legcord.platform as "win32" | "linux" | "darwin",
+                    os: window.youcord.platform as "win32" | "linux" | "darwin",
                 },
             ],
             id: appId().trim(),
@@ -66,7 +66,7 @@ export const AddDetectableModal = (props: { close: () => void; executable: strin
         current.push(game);
         store.settings.detectables = current;
         // Send a plain object so IPC structured clone does not fail (store may wrap with proxies)
-        window.legcord.rpc.addDetectable(JSON.parse(JSON.stringify(game)) as Game);
+        window.youcord.rpc.addDetectable(JSON.parse(JSON.stringify(game)) as Game);
         setRestartRequired();
 
         props.close();
@@ -78,7 +78,7 @@ export const AddDetectableModal = (props: { close: () => void; executable: strin
             confirmText: store.i18n["settings-restart"],
             cancelText: store.i18n["settings-restartLater"],
         }).then(
-            () => window.legcord.restart(),
+            () => window.youcord.restart(),
             () => {},
         );
     }

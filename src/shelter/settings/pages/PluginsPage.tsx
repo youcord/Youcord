@@ -1,5 +1,5 @@
 import { createSignal, For, onMount, Show } from "solid-js";
-import type { LegcordPluginInfo } from "../../../@types/legcordWindow.js";
+import type { YoucordPluginInfo } from "../../../@types/youcordWindow.js";
 import { EmptyState } from "../components/EmptyState.jsx";
 import { PluginCard } from "../components/PluginCard.jsx";
 import { SettingsPageHeader } from "../components/SettingsPageHeader.jsx";
@@ -15,7 +15,7 @@ function formatPluginMessage(template: string, name: string) {
 }
 
 export function PluginsPage() {
-    const [plugins, setPlugins] = createSignal<LegcordPluginInfo[]>([]);
+    const [plugins, setPlugins] = createSignal<YoucordPluginInfo[]>([]);
     const [busyIds, setBusyIds] = createSignal<string[]>([]);
     const t = () => store.i18n;
 
@@ -31,11 +31,11 @@ export function PluginsPage() {
     const isBusy = (pluginId: string) => busyIds().includes(pluginId);
 
     const refreshPlugins = async () => {
-        const list = await window.legcord.plugins.list();
+        const list = await window.youcord.plugins.list();
         setPlugins(list);
     };
 
-    const onToggle = async (plugin: LegcordPluginInfo, enabled: boolean) => {
+    const onToggle = async (plugin: YoucordPluginInfo, enabled: boolean) => {
         setBusy(plugin.id, true);
         try {
             if (enabled && !plugin.compatible) {
@@ -48,7 +48,7 @@ export function PluginsPage() {
                 });
                 return;
             }
-            const result = await window.legcord.plugins.setEnabled(plugin.id, enabled);
+            const result = await window.youcord.plugins.setEnabled(plugin.id, enabled);
             if (!result.ok) {
                 showToast({
                     title: t()["plugins-toastTitle"],
@@ -65,10 +65,10 @@ export function PluginsPage() {
         }
     };
 
-    const onReload = async (plugin: LegcordPluginInfo) => {
+    const onReload = async (plugin: YoucordPluginInfo) => {
         setBusy(plugin.id, true);
         try {
-            const result = await window.legcord.plugins.reload(plugin.id);
+            const result = await window.youcord.plugins.reload(plugin.id);
             showToast({
                 title: t()["plugins-toastTitle"],
                 content: formatPluginMessage(
@@ -94,7 +94,7 @@ export function PluginsPage() {
                 <Button size={ButtonSizes.LARGE} onClick={() => void refreshPlugins()}>
                     {t()["plugins-refresh"]}
                 </Button>
-                <Button size={ButtonSizes.LARGE} onClick={window.legcord.plugins.openFolder}>
+                <Button size={ButtonSizes.LARGE} onClick={window.youcord.plugins.openFolder}>
                     {t()["plugins-openFolder"]}
                 </Button>
             </div>
@@ -105,7 +105,7 @@ export function PluginsPage() {
                         message={t()["plugins-empty"]}
                         description={t()["plugins-emptyDesc"]}
                         actionLabel={t()["plugins-openFolder"]}
-                        onAction={window.legcord.plugins.openFolder}
+                        onAction={window.youcord.plugins.openFolder}
                     />
                 }
             >

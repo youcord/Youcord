@@ -49,8 +49,8 @@ export function SettingsPage() {
                         "Settings are not available on a first-time launch. Please restart."}
                 </p>
                 <br />
-                <Button size={ButtonSizes.MAX} onClick={() => window.legcord.restart()}>
-                    Restart Legcord
+                <Button size={ButtonSizes.MAX} onClick={() => window.youcord.restart()}>
+                    Restart Youcord
                 </Button>
             </>
         );
@@ -302,8 +302,8 @@ export function SettingsPage() {
                             <Show
                                 when={
                                     store.settings.transparency !== "none" &&
-                                    window.legcord.platform === "darwin" &&
-                                    Number.parseInt(window.legcord.osRelease, 10) >= 25
+                                    window.youcord.platform === "darwin" &&
+                                    Number.parseInt(window.youcord.osRelease, 10) >= 25
                                 }
                             >
                                 <div
@@ -323,7 +323,7 @@ export function SettingsPage() {
                                 label: t["settings-transparency-universal"],
                                 value: "universal",
                             },
-                            ...(window.legcord.platform === "win32" || window.legcord.platform === "darwin"
+                            ...(window.youcord.platform === "win32" || window.youcord.platform === "darwin"
                                 ? [
                                       {
                                           label: t["settings-transparency-modern"],
@@ -337,7 +337,7 @@ export function SettingsPage() {
                 </SearchableSetting>
                 <Show
                     when={
-                        window.legcord.platform === "win32" &&
+                        window.youcord.platform === "win32" &&
                         isMinWindowsVersion(10, 0, 22000) &&
                         store.settings.transparency === "modern"
                     }
@@ -358,7 +358,7 @@ export function SettingsPage() {
                         />
                     </SearchableSetting>
                 </Show>
-                <Show when={window.legcord.platform === "darwin"}>
+                <Show when={window.youcord.platform === "darwin"}>
                     <SearchableSetting keywords={[t["settings-bounceOnPing"], t["settings-bounceOnPing-desc"]]}>
                         <SwitchItem
                             note={t["settings-bounceOnPing-desc"]}
@@ -457,7 +457,7 @@ export function SettingsPage() {
                         {t["settings-useSystemCssEditor"]}
                     </SwitchItem>
                 </SearchableSetting>
-                <Show when={window.legcord.platform === "darwin"}>
+                <Show when={window.youcord.platform === "darwin"}>
                     <SearchableSetting
                         keywords={[t["settings-useMacSystemPicker"], t["settings-useMacSystemPicker-desc"]]}
                     >
@@ -620,7 +620,7 @@ export function SettingsPage() {
                             {t["settings-processScanning"]}
                         </SwitchItem>
                     </SearchableSetting>
-                    <Show when={window.legcord.platform === "win32"}>
+                    <Show when={window.youcord.platform === "win32"}>
                         <SearchableSetting
                             keywords={[t["settings-windowsLegacyScanning"], t["settings-windowsLegacyScanning-desc"]]}
                         >
@@ -719,7 +719,7 @@ export function SettingsPage() {
                         {t["settings-showExperimentalPluginMenu"]}
                     </SwitchItem>
                 </SearchableSetting>
-                <Show when={window.legcord.platform === "linux"}>
+                <Show when={window.youcord.platform === "linux"}>
                     <SearchableSetting
                         keywords={[t["settings-venmic-deviceSelect"], t["settings-venmic-deviceSelect-desc"], "venmic"]}
                     >
@@ -872,7 +872,7 @@ export function SettingsPage() {
                         {t["settings-hardwareAcceleration"]}
                     </SwitchItem>
                 </SearchableSetting>
-                <Show when={window.legcord.platform === "darwin" || window.legcord.platform === "win32"}>
+                <Show when={window.youcord.platform === "darwin" || window.youcord.platform === "win32"}>
                     <SearchableSetting
                         keywords={[
                             t["settings-sdpH264BaselineRewrite"],
@@ -892,7 +892,7 @@ export function SettingsPage() {
                         </SwitchItem>
                     </SearchableSetting>
                 </Show>
-                <Show when={window.legcord.platform === "linux"}>
+                <Show when={window.youcord.platform === "linux"}>
                     <SearchableSetting keywords={[t["settings-vaapi"], t["settings-vaapi-desc"], "VAAPI"]}>
                         <SwitchItem
                             note={t["settings-vaapi-desc"]}
@@ -1000,32 +1000,32 @@ export function SettingsPage() {
                 </Show>
                 <div class={classes.panelActions}>
                     <SearchableSetting keywords={[t["settings-openCustomIconDialog"], "icon"]}>
-                        <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.openCustomIconDialog}>
+                        <Button size={ButtonSizes.MAX} onClick={window.youcord.settings.openCustomIconDialog}>
                             {t["settings-openCustomIconDialog"]}
                         </Button>
                     </SearchableSetting>
                     <SearchableSetting keywords={[t["settings-storageFolder"], "storage"]}>
-                        <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.openStorageFolder}>
+                        <Button size={ButtonSizes.MAX} onClick={window.youcord.settings.openStorageFolder}>
                             {t["settings-storageFolder"]}
                         </Button>
                     </SearchableSetting>
                     <SearchableSetting keywords={[t["settings-copyDebugInfo"], "debug"]}>
-                        <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.copyDebugInfo}>
+                        <Button size={ButtonSizes.MAX} onClick={window.youcord.settings.copyDebugInfo}>
                             {t["settings-copyDebugInfo"]}
                         </Button>
                     </SearchableSetting>
                     <SearchableSetting keywords={[t["settings-copyGPUInfo"], "GPU"]}>
-                        <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.copyGPUInfo}>
+                        <Button size={ButtonSizes.MAX} onClick={window.youcord.settings.copyGPUInfo}>
                             {t["settings-copyGPUInfo"]}
                         </Button>
                     </SearchableSetting>
                     <SearchableSetting keywords={[t["settings-openWebRTCInternals"], "WebRTC", "internals"]}>
-                        <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.openWebRTCInternals}>
+                        <Button size={ButtonSizes.MAX} onClick={window.youcord.settings.openWebRTCInternals}>
                             {t["settings-openWebRTCInternals"]}
                         </Button>
                     </SearchableSetting>
                     <SearchableSetting keywords={[t["settings-openGPUInfo"], "GPU", "chrome"]}>
-                        <Button size={ButtonSizes.MAX} onClick={window.legcord.settings.openGPUInfo}>
+                        <Button size={ButtonSizes.MAX} onClick={window.youcord.settings.openGPUInfo}>
                             {t["settings-openGPUInfo"]}
                         </Button>
                     </SearchableSetting>
