@@ -37,7 +37,9 @@ export const config: Configuration = {
     mac: {
         category: "public.app-category.social-networking",
         darkModeSupport: true,
-        notarize: true,
+        // Fork build: no Apple signing identity, so builds are unsigned.
+        // Re-enable once you have your own Apple Developer certificate + secrets.
+        notarize: false,
         extendInfo: {
             NSMicrophoneUsageDescription: "Youcord requires access to the microphone to function properly.",
             NSCameraUsageDescription: "Youcord requires access to the camera to function properly.",
