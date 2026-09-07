@@ -1,6 +1,6 @@
 {
     "name": "youcord",
-    "version": "1.3.0",
+    "version": "1.3.1",
     "description": "Youcord is a custom client designed to enhance your Discord experience while keeping everything lightweight.",
     "main": "ts-out/main.js",
     "engines": {

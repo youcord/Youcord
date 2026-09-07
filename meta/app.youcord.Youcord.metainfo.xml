@@ -29,6 +29,21 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="1.3.1" date="2026-09-08" type="stable">
+      <url>https://github.com/youcord/Youcord/releases/tag/v1.3.1</url>
+      <description>
+        <ul>
+          <li>🎨 Rebranding complet de Legcord vers Youcord</li>
+          <li>🐛 Correction du positionnement des traffic lights macOS</li>
+          <li>🐛 Correction du sélecteur de screenshare avec prévisualisations individuelles</li>
+          <li>🐛 Correction de l'onglet thèmes</li>
+          <li>🐛 Correction du chargement RPC pour large_image et small_image</li>
+          <li>⚡ Amélioration de performance avec cache de configuration IPC</li>
+          <li>⚡ Délai de démarrage limité à Linux uniquement</li>
+          <li>🛠️ Mise à jour des dépendances et correctifs CI</li>
+        </ul>
+      </description>
+    </release>
     <release version="Youcord v1.3.0" date="2026-09-07" type="stable">
       <url>https://github.com/youcord/Youcord/releases/tag/v1.3.0</url>
       <description/>
