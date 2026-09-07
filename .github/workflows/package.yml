@@ -4,6 +4,8 @@ on:
     branches:
       - dev
       - stable
+permissions:
+  contents: write
 jobs:
   package:
     continue-on-error: true
