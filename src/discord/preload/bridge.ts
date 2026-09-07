@@ -2,9 +2,9 @@ const { contextBridge, ipcRenderer } = require("electron");
 
 import type { Game } from "arrpc";
 import type { Keybind } from "../../@types/keybind.js";
-import type { YoucordWindow } from "../../@types/youcordWindow.d.ts";
 import type { Settings } from "../../@types/settings.js";
 import type { ThemeManifest } from "../../@types/themeManifest.js";
+import type { YoucordWindow } from "../../@types/youcordWindow.d.ts";
 import type { AppliedFlagsOutput } from "../../main.js";
 import type { venmicListObject } from "../venmic.js";
 
