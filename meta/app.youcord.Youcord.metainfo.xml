@@ -29,6 +29,10 @@
     </screenshot>
   </screenshots>
   <releases>
+    <release version="Youcord v1.3.0" date="2026-09-07" type="stable">
+      <url>https://github.com/youcord/Youcord/releases/tag/v1.3.0</url>
+      <description/>
+    </release>
     <release version="1.3.0" date="2026-07-26" type="stable">
       <url>https://github.com/Legcord/Legcord/releases/tag/v1.3.0</url>
       <description>
